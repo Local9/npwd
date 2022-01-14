@@ -24,6 +24,7 @@ exp('generatePhoneNumber', async () => {
 // for these to be available
 if (config.general.useResourceIntegration) {
   exp('newPlayer', async (playerDTO: PlayerAddData) => {
+    playerDTO = JSON.parse(`${playerDTO}`);
     if (typeof playerDTO.source !== 'number') {
       return playerLogger.error('Source must be passed as a number when loading a player');
     }
