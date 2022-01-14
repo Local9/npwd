@@ -33,6 +33,7 @@ if (config.general.useResourceIntegration) {
   });
 
   exp('unloadPlayer', async (src: number) => {
+    src = +src;
     if (typeof src !== 'number') {
       return playerLogger.error('Source must be passed as a number when unloading a player');
     }
