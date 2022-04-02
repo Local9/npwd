@@ -31,6 +31,25 @@ if (config.general.useResourceIntegration) {
     emitNet(PhoneEvents.SET_PLAYER_LOADED, playerDTO.source, true);
   });
 
+  exp(
+    'newPlayerAdvanced',
+    async (source: number, identifier: string, firstname: string, phoneNumber: string) => {
+      if (typeof source !== 'number') {
+        return playerLogger.error('Source must be passed as a number when loading a player');
+      }
+
+      const playerDTO: PlayerAddData = {
+        source: source,
+        identifier: identifier,
+        firstname: firstname,
+        phoneNumber: phoneNumber,
+      };
+
+      await PlayerService.handleNewPlayerEvent(playerDTO);
+      emitNet(PhoneEvents.SET_PLAYER_LOADED, playerDTO.source, true);
+    },
+  );
+
   exp('unloadPlayer', async (src: number) => {
     if (typeof src !== 'number') {
       return playerLogger.error('Source must be passed as a number when unloading a player');
