@@ -14,6 +14,7 @@ import {
   MessagesRequest,
   PreDBConversation,
   PreDBMessage,
+  Location,
 } from '../../../typings/messages';
 import PlayerService from '../players/player.service';
 import { emitNetTyped } from '../utils/miscUtils';
@@ -117,6 +118,9 @@ class _MessagesService {
         }
       }
     } catch (err) {
+      messagesLogger.error(
+        `Error occurred on creating message conversation (${reqObj.source}), Error: ${err.message}`,
+      );
       resp({ status: 'error', errorMsg: err.message });
     }
   }
@@ -147,7 +151,7 @@ class _MessagesService {
 
       const conversationDetails = await this.messagesDB.getConversation(messageData.conversationId);
 
-      const messageId = await this.messagesDB.createMessage({
+      const message = await this.messagesDB.createMessage({
         userIdentifier,
         authorPhoneNumber,
         conversationId: messageData.conversationId,
@@ -159,12 +163,10 @@ class _MessagesService {
       resp({
         status: 'ok',
         data: {
-          ...messageData,
+          ...message,
+          message: message.message,
           conversation_id: messageData.conversationId,
           author: authorPhoneNumber,
-          id: messageId,
-          message: messageData.message,
-          embed: messageData.embed,
           is_embed: messageData.is_embed,
         },
       });
@@ -219,8 +221,7 @@ class _MessagesService {
               }
 
               emitNet(MessageEvents.SEND_MESSAGE_SUCCESS, participantPlayer.source, {
-                ...messageData,
-                conversation_id: messageData.conversationId,
+                ...message,
                 author: authorPhoneNumber,
               });
               emitNet(MessageEvents.CREATE_MESSAGE_BROADCAST, participantPlayer.source, {
@@ -232,7 +233,7 @@ class _MessagesService {
               });
             }
           } catch (err) {
-            messagesLogger.error(`Failed to broadcast message, Error: ${err.message}`);
+            messagesLogger.warn(`Failed to broadcast message. Player is not online.`);
           }
         }
       }
@@ -283,23 +284,52 @@ class _MessagesService {
 
   // Exports
   async handleEmitMessage(dto: EmitMessageExportCtx) {
-    const { senderNumber, targetNumber, message } = dto;
+    const { senderNumber, targetNumber, message, embed } = dto;
 
     try {
-      const senderPlayer = await PlayerService.getIdentifierByPhoneNumber(senderNumber, true);
+      // this will post an error message if the number doesn't exist but emitMessage will so go through from roleplay number
+      const senderPlayer = await PlayerService.getIdentifierFromPhoneNumber(senderNumber, true);
 
-      const participantIdentifier = await PlayerService.getIdentifierByPhoneNumber(targetNumber);
+      const participantIdentifier = await PlayerService.getIdentifierFromPhoneNumber(targetNumber);
       const participantPlayer = PlayerService.getPlayerFromIdentifier(participantIdentifier);
 
       // Create our groupId hash
       const conversationList = createGroupHashID([senderNumber, targetNumber]);
-      // Get our conversationId
-      const conversationId = await this.messagesDB.getConversationId(conversationList);
+
+      const doesConversationExist = await this.messagesDB.doesConversationExist(conversationList);
+      let conversationId: number;
+
+      // Generate conversation id or assign from existing conversation
+      // If we generate the conversation we add the player and update their front-end if they're online
+      if (!doesConversationExist) {
+        conversationId = await this.messagesDB.createConversation(
+          [senderNumber, targetNumber],
+          conversationList,
+          '',
+          false,
+        );
+
+        if (participantPlayer) {
+          emitNetTyped<MessageConversation>(
+            MessageEvents.CREATE_MESSAGE_CONVERSATION_SUCCESS,
+            {
+              id: conversationId,
+              conversationList,
+              label: '',
+              isGroupChat: false,
+              participant: targetNumber,
+            },
+            participantPlayer.source,
+          );
+        }
+      } else {
+        conversationId = await this.messagesDB.getConversationId(conversationList);
+      }
 
       const messageId = await this.messagesDB.createMessage({
         message,
-        embed: '',
-        is_embed: false,
+        embed: embed,
+        is_embed: !!embed,
         conversationId,
         userIdentifier: senderPlayer || senderNumber,
         authorPhoneNumber: senderNumber,
@@ -309,6 +339,8 @@ class _MessagesService {
       const messageData = {
         id: messageId,
         message,
+        embed: embed || '',
+        is_embed: !!embed,
         conversationList,
         conversation_id: conversationId,
         author: senderNumber,
@@ -324,6 +356,8 @@ class _MessagesService {
           conversationName: senderNumber,
           conversation_id: conversationId,
           message: messageData.message,
+          is_embed: messageData.is_embed,
+          embed: messageData.embed,
         });
       }
 
@@ -331,6 +365,19 @@ class _MessagesService {
     } catch (err) {
       console.log(`Failed to emit message. Error: ${err.message}`);
     }
+  }
+
+  async handleGetLocation(reqObj: PromiseRequest, resp: PromiseEventResp<Location>) {
+    const phoneNumber = PlayerService.getPlayer(reqObj.source).getPhoneNumber();
+    const playerPed = GetPlayerPed(reqObj.source.toString());
+
+    resp({
+      status: 'ok',
+      data: {
+        phoneNumber,
+        coords: GetEntityCoords(playerPed),
+      },
+    });
   }
 }
 

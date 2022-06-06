@@ -58,3 +58,7 @@ if (config.general.useResourceIntegration) {
     await PlayerService.handleUnloadPlayerEvent(src);
   });
 }
+
+exp('getPhoneNumber', (src: number): string => {
+  return PlayerService.getPlayer(src).getPhoneNumber();
+});

@@ -21,6 +21,8 @@ export enum PhoneEvents {
   TOGGLE_KEYS = 'npwd:toggleAllControls',
   SET_PLAYER_LOADED = 'npwd:setPlayerLoaded',
   IS_PHONE_DISABLED = 'npwd:isPhoneDisabled',
+  SEND_PLAYER_SOURCE = 'npwd:sendPlayerSource',
+  GET_PHONE_NUMBER = 'npwd:getPhoneNumber',
 }
 
 // Used to standardize the server response
