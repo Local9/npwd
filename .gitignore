@@ -5,14 +5,11 @@
 
 npwd_temp
 
-resources/html
-
 phone/.eslintcache
 
 # Node Modules and Built Folders
 node_modules
 build
-dist
 
 # Error Logs
 npm-debug.log*
