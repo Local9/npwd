@@ -10,10 +10,6 @@
     "toggleCommand": "phone",
     "defaultLanguage": "en"
   },
-  "profanityFilter": {
-    "enabled": true,
-    "badWords": ["esx"]
-  },
   "database": {
     "useIdentifierPrefix": false,
     "playerTable": "user",
@@ -45,6 +41,10 @@
       "wikipedia.org"
     ]
   },
+  "profanityFilter": {
+    "enabled": true,
+    "badWords": ["esx"]
+  },
   "twitter": {
     "showNotifications": true,
     "generateProfileNameFromUsers": true,
@@ -61,6 +61,9 @@
   "match": {
     "generateProfileNameFromUsers": true,
     "allowEditableProfileName": true
+  },
+  "marketplace": {
+    "persistListings": false
   },
   "debug": {
     "level": "silly",
