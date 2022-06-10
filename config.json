@@ -44,7 +44,7 @@
   },
   "profanityFilter": {
     "enabled": true,
-    "badWords": ["esx"]
+    "badWords": ["esx", "nigger", "nigga", "n1gg3r", "n!gger", "n!gg3r", "n1gger"]
   },
   "twitter": {
     "showNotifications": true,
