@@ -67,6 +67,8 @@ interface ImageConfig {
   type: string;
   imageEncoding: 'png' | 'jpg' | 'webp';
   contentType: string;
+  useContentType: boolean;
+  authorizationHeader: string;
   authorizationPrefix: string;
   useAuthorization: boolean;
   returnedDataIndexes: Array<any>;
@@ -98,4 +100,5 @@ export interface ResourceConfig {
   images: ImageConfig;
   imageSafety: ImageSafety;
   profanityFilter: ProfanityFilter;
+  apps: string[];
 }

@@ -70,5 +70,6 @@
     "level": "silly",
     "enabled": false,
     "sentryEnabled": true
-  }
+  },
+  "apps": []
 }

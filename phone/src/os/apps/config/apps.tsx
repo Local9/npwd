@@ -30,11 +30,13 @@ import {
   TWITTER_APP_TEXT_COLOR,
 } from '../../../apps/twitter/twitter.theme';
 import { MATCH_APP_PRIMARY_COLOR, MATCH_APP_TEXT_COLOR } from '../../../apps/match/match.theme';
-import { SvgIconProps } from '@mui/material';
+import { SvgIconProps, Theme } from '@mui/material';
 import { INotificationIcon } from '@os/notifications/providers/NotificationsProvider';
 import { BrowserApp } from '../../../apps/browser/components/BrowserApp';
 import { MatchApp } from '../../../apps/match/components/MatchApp';
 import TwitterContainer from '../../../apps/twitter/components/TwitterContainer';
+import { IPhoneSettings } from '@typings/settings';
+import { i18n } from 'i18next';
 
 export interface IAppConfig {
   id: string;
@@ -43,7 +45,7 @@ export interface IAppConfig {
   color: string;
   path: string;
   disable?: boolean;
-  Route: React.FC;
+  Route: React.FC<{ settings?: IPhoneSettings; i18n?: i18n; theme?: Theme }>;
 }
 
 export type IApp = IAppConfig & {
@@ -53,6 +55,7 @@ export type IApp = IAppConfig & {
   notificationIcon: JSX.Element;
   NotificationIcon: React.FC<SvgIconProps>;
   Icon?: React.FC<SvgIconProps>;
+  theme?: any;
 };
 
 export const APPS: IAppConfig[] = [
@@ -114,15 +117,6 @@ export const APPS: IAppConfig[] = [
       <AppRoute id="SETTINGS" path="/settings" component={SettingsApp} emitOnOpen={false} />
     ),
   },
-  /* Hiding the bank app while the bank resource gets done */
-  /*{
-    id: 'BANK',
-    nameLocale: 'APPS_BANK',
-    backgroundColor: blue[900],
-    color: common.white,
-    path: '/bank',
-    Route: () => <AppRoute id="BANK" path="/bank" component={BankApp} />,
-  },*/
   {
     id: 'MATCH',
     nameLocale: 'APPS_MATCH',
