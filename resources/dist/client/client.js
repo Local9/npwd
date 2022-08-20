@@ -33,7 +33,10 @@
     }
     return to;
   };
-  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+    mod
+  ));
   var __async = (__this, __arguments, generator) => {
     return new Promise((resolve, reject) => {
       var fulfilled = (value) => {
@@ -55,10 +58,10 @@
     });
   };
 
-  // resources/utils/fivem.ts
+  // utils/fivem.ts
   var Delay, uuidv4;
   var init_fivem = __esm({
-    "resources/utils/fivem.ts"() {
+    "utils/fivem.ts"() {
       Delay = (ms) => new Promise((res) => setTimeout(res, ms));
       uuidv4 = () => {
         let uuid = "";
@@ -86,10 +89,10 @@
     }
   });
 
-  // resources/client/cl_utils.ts
+  // client/cl_utils.ts
   var ClientUtils, RegisterNuiCB, playerLoaded, RegisterNuiProxy, verifyExportArgType;
   var init_cl_utils = __esm({
-    "resources/client/cl_utils.ts"() {
+    "client/cl_utils.ts"() {
       init_fivem();
       init_client();
       ClientUtils = class {
@@ -151,12 +154,16 @@
       verifyExportArgType = (exportName, passedArg, validTypes) => {
         const passedArgType = typeof passedArg;
         if (!validTypes.includes(passedArgType))
-          throw new Error(`Export ${exportName} was called with incorrect argument type (${validTypes.join(", ")}. Passed: ${passedArg}, Type: ${passedArgType})`);
+          throw new Error(
+            `Export ${exportName} was called with incorrect argument type (${validTypes.join(
+              ", "
+            )}. Passed: ${passedArg}, Type: ${passedArgType})`
+          );
       };
     }
   });
 
-  // shared/deepMergeObjects.ts
+  // ../shared/deepMergeObjects.ts
   function isObject(item) {
     return item && typeof item === "object" && !Array.isArray(item);
   }
@@ -178,106 +185,101 @@
     return deepMergeObjects(target, ...sources);
   }
   var init_deepMergeObjects = __esm({
-    "shared/deepMergeObjects.ts"() {
+    "../shared/deepMergeObjects.ts"() {
     }
   });
 
-  // config.default.json
-  var PhoneAsItem, general, database, images, imageSafety, profanityFilter, twitter, match, marketplace, debug, config_default_default;
+  // ../config.default.json
+  var config_default_default;
   var init_config_default = __esm({
-    "config.default.json"() {
-      PhoneAsItem = {
-        enabled: false,
-        exportResource: "my-core-resource",
-        exportFunction: "myCheckerFunction"
-      };
-      general = {
-        useResourceIntegration: false,
-        toggleKey: "f1",
-        toggleCommand: "phone",
-        defaultLanguage: "en",
-        showId: false
-      };
-      database = {
-        useIdentifierPrefix: false,
-        playerTable: "users",
-        identifierColumn: "identifier",
-        identifierType: "license",
-        profileQueries: true,
-        phoneNumberColumn: "phone_number"
-      };
-      images = {
-        url: "https://api.imgur.com/3/image",
-        type: "imgur",
-        imageEncoding: "jpg",
-        contentType: "multipart/form-data",
-        authorizationPrefix: "Client-ID",
-        useAuthorization: true,
-        returnedDataIndexes: ["data", "link"]
-      };
-      imageSafety = {
-        filterUnsafeImageUrls: true,
-        embedUnsafeImages: false,
-        embedUrl: "https://i.example.com/embed",
-        safeImageUrls: [
-          "imgur.com",
-          "file.glass",
-          "dropbox.com",
-          "tenor.com",
-          "discord.com",
-          "discordapp.com",
-          "wikipedia.org"
-        ]
-      };
-      profanityFilter = {
-        enabled: false,
-        badWords: ["esx"]
-      };
-      twitter = {
-        showNotifications: true,
-        generateProfileNameFromUsers: true,
-        allowEditableProfileName: true,
-        allowDeleteTweets: true,
-        allowReportTweets: true,
-        allowRetweet: true,
-        characterLimit: 160,
-        newLineLimit: 10,
-        enableAvatars: true,
-        enableEmojis: true,
-        enableImages: true,
-        maxImages: 3
-      };
-      match = {
-        generateProfileNameFromUsers: true,
-        allowEditableProfileName: true
-      };
-      marketplace = {
-        persistListings: false
-      };
-      debug = {
-        level: "error",
-        enabled: true,
-        sentryEnabled: true
-      };
+    "../config.default.json"() {
       config_default_default = {
-        PhoneAsItem,
-        general,
-        database,
-        images,
-        imageSafety,
-        profanityFilter,
-        twitter,
-        match,
-        marketplace,
-        debug
+        PhoneAsItem: {
+          enabled: false,
+          exportResource: "my-core-resource",
+          exportFunction: "myCheckerFunction"
+        },
+        general: {
+          useResourceIntegration: false,
+          toggleKey: "f1",
+          toggleCommand: "phone",
+          defaultLanguage: "en",
+          showId: false
+        },
+        database: {
+          useIdentifierPrefix: false,
+          playerTable: "users",
+          identifierColumn: "identifier",
+          identifierType: "license",
+          profileQueries: true,
+          phoneNumberColumn: "phone_number"
+        },
+        images: {
+          url: "https://api.projecterror.dev/image",
+          type: "pe_image",
+          imageEncoding: "jpg",
+          contentType: "multipart/form-data",
+          useContentType: false,
+          authorizationHeader: "PE-Secret",
+          authorizationPrefix: "",
+          useAuthorization: true,
+          returnedDataIndexes: ["url"]
+        },
+        imageSafety: {
+          filterUnsafeImageUrls: true,
+          embedUnsafeImages: false,
+          embedUrl: "https://i.example.com/embed",
+          safeImageUrls: [
+            "i.imgur.com",
+            "i.file.glass",
+            "dropbox.com",
+            "c.tenor.com",
+            "discord.com",
+            "cdn.discordapp.com",
+            "media.discordapp.com",
+            "upload.wikipedia.org",
+            "i.projecterror.dev"
+          ]
+        },
+        profanityFilter: {
+          enabled: false,
+          badWords: ["esx"]
+        },
+        twitter: {
+          showNotifications: true,
+          generateProfileNameFromUsers: true,
+          allowEditableProfileName: true,
+          allowDeleteTweets: true,
+          allowReportTweets: true,
+          allowRetweet: true,
+          characterLimit: 160,
+          newLineLimit: 10,
+          enableAvatars: true,
+          enableEmojis: true,
+          enableImages: true,
+          maxImages: 3
+        },
+        match: {
+          generateProfileNameFromUsers: true,
+          allowEditableProfileName: true
+        },
+        marketplace: {
+          persistListings: false
+        },
+        debug: {
+          level: "error",
+          enabled: true,
+          sentryEnabled: true
+        },
+        apps: []
       };
     }
   });
 
-  // resources/client/cl_config.ts
+  // client/cl_config.ts
   var config;
   var init_cl_config = __esm({
-    "resources/client/cl_config.ts"() {
+    "client/cl_config.ts"() {
       init_deepMergeObjects();
       init_config_default();
       config = (() => {
@@ -297,10 +299,10 @@
     }
   });
 
-  // resources/utils/apps.ts
+  // utils/apps.ts
   var apps_default;
   var init_apps = __esm({
-    "resources/utils/apps.ts"() {
+    "utils/apps.ts"() {
       apps_default = {
         TWITTER: "TWITTER",
         MATCH: "MATCH",
@@ -314,7 +316,7 @@
     }
   });
 
-  // resources/utils/messages.ts
+  // utils/messages.ts
   function sendMessage(app, method, data) {
     return SendNUIMessage({
       app,
@@ -347,18 +349,18 @@
     return sendMessage(apps_default.PHONE, method, data);
   }
   var init_messages = __esm({
-    "resources/utils/messages.ts"() {
+    "utils/messages.ts"() {
       init_apps();
     }
   });
 
-  // typings/phone.ts
+  // ../typings/phone.ts
   var init_phone = __esm({
-    "typings/phone.ts"() {
+    "../typings/phone.ts"() {
     }
   });
 
-  // resources/client/functions.ts
+  // client/functions.ts
   function removePhoneProp() {
     if (prop != 0) {
       DeleteEntity(prop);
@@ -368,7 +370,7 @@
   }
   var prop, propCreated, phoneModel, newPhoneProp;
   var init_functions = __esm({
-    "resources/client/functions.ts"() {
+    "client/functions.ts"() {
       init_fivem();
       prop = 0;
       propCreated = false;
@@ -384,7 +386,23 @@
           const [x, y, z] = GetEntityCoords(playerPed, true);
           prop = CreateObject(GetHashKey(phoneModel), x, y, z + 0.2, true, true, true);
           const boneIndex = GetPedBoneIndex(playerPed, 28422);
-          AttachEntityToEntity(prop, playerPed, boneIndex, 0, 0, 0, 0, 0, -0, true, true, false, true, 1, true);
+          AttachEntityToEntity(
+            prop,
+            playerPed,
+            boneIndex,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -0,
+            true,
+            true,
+            false,
+            true,
+            1,
+            true
+          );
           propCreated = true;
         } else if (propCreated) {
           console.log("prop already created");
@@ -393,10 +411,10 @@
     }
   });
 
-  // resources/client/animations/animation.service.ts
+  // client/animations/animation.service.ts
   var AnimationService;
   var init_animation_service = __esm({
-    "resources/client/animations/animation.service.ts"() {
+    "client/animations/animation.service.ts"() {
       init_functions();
       init_fivem();
       AnimationService = class {
@@ -598,16 +616,16 @@
     }
   });
 
-  // resources/client/animations/animation.controller.ts
+  // client/animations/animation.controller.ts
   var animationService;
   var init_animation_controller = __esm({
-    "resources/client/animations/animation.controller.ts"() {
+    "client/animations/animation.controller.ts"() {
       init_animation_service();
       animationService = new AnimationService();
     }
   });
 
-  // resources/client/cl_main.ts
+  // client/cl_main.ts
   function togglePhone() {
     return __async(this, null, function* () {
       const canAccess = yield checkHasPhone();
@@ -620,7 +638,7 @@
   }
   var exps, getCurrentGameTime, showPhone, hidePhone, checkHasPhone;
   var init_cl_main = __esm({
-    "resources/client/cl_main.ts"() {
+    "client/cl_main.ts"() {
       init_messages();
       init_phone();
       init_cl_config();
@@ -637,9 +655,18 @@
           sendMessage("PHONE", "npwd:unloadCharacter" /* UNLOAD_CHARACTER */, {});
         }
       });
-      RegisterKeyMapping(config.general.toggleCommand, "Toggle Phone", "keyboard", config.general.toggleKey);
+      RegisterKeyMapping(
+        config.general.toggleCommand,
+        "Toggle Phone",
+        "keyboard",
+        config.general.toggleKey
+      );
       setTimeout(() => {
-        emit("chat:addSuggestion", `/${config.general.toggleCommand}`, "Toggle displaying your cellphone");
+        emit(
+          "chat:addSuggestion",
+          `/${config.general.toggleCommand}`,
+          "Toggle displaying your cellphone"
+        );
       }, 1e3);
       getCurrentGameTime = () => {
         let hour = GetClockHours();
@@ -670,18 +697,28 @@
         SetNuiFocusKeepInput(false);
         emit("npwd:disableControlActions", false);
       });
-      RegisterCommand(config.general.toggleCommand, () => __async(void 0, null, function* () {
-        if (!global.isPhoneDisabled)
-          yield togglePhone();
-      }), false);
-      RegisterCommand("phone:restart", () => __async(void 0, null, function* () {
-        yield hidePhone();
-        sendMessage("PHONE", "phoneRestart", {});
-      }), false);
+      RegisterCommand(
+        config.general.toggleCommand,
+        () => __async(void 0, null, function* () {
+          if (!global.isPhoneDisabled && !IsPauseMenuActive())
+            yield togglePhone();
+        }),
+        false
+      );
+      RegisterCommand(
+        "phone:restart",
+        () => __async(void 0, null, function* () {
+          yield hidePhone();
+          sendMessage("PHONE", "phoneRestart", {});
+        }),
+        false
+      );
       checkHasPhone = () => __async(void 0, null, function* () {
         if (!config.PhoneAsItem.enabled)
           return true;
-        const exportResp = yield Promise.resolve(exps[config.PhoneAsItem.exportResource][config.PhoneAsItem.exportFunction]());
+        const exportResp = yield Promise.resolve(
+          exps[config.PhoneAsItem.exportResource][config.PhoneAsItem.exportFunction]()
+        );
         if (typeof exportResp !== "number" && typeof exportResp !== "boolean") {
           throw new Error("You must return either a boolean or number from your export function");
         }
@@ -705,11 +742,14 @@
         yield hidePhone();
         cb();
       }));
-      RegisterNuiCB("npwd:toggleAllControls" /* TOGGLE_KEYS */, (_0, _1) => __async(void 0, [_0, _1], function* ({ keepGameFocus }, cb) {
-        if (global.isPhoneOpen)
-          SetNuiFocusKeepInput(keepGameFocus);
-        cb({});
-      }));
+      RegisterNuiCB(
+        "npwd:toggleAllControls" /* TOGGLE_KEYS */,
+        (_0, _1) => __async(void 0, [_0, _1], function* ({ keepGameFocus }, cb) {
+          if (global.isPhoneOpen)
+            SetNuiFocusKeepInput(keepGameFocus);
+          cb({});
+        })
+      );
       if (config.PhoneAsItem.enabled) {
         setTimeout(() => {
           let doesExportExist = false;
@@ -725,15 +765,15 @@
     }
   });
 
-  // typings/twitter.ts
+  // ../typings/twitter.ts
   var init_twitter = __esm({
-    "typings/twitter.ts"() {
+    "../typings/twitter.ts"() {
     }
   });
 
-  // resources/client/cl_twitter.ts
+  // client/cl_twitter.ts
   var init_cl_twitter = __esm({
-    "resources/client/cl_twitter.ts"() {
+    "client/cl_twitter.ts"() {
       init_twitter();
       init_messages();
       init_cl_utils();
@@ -753,15 +793,15 @@
     }
   });
 
-  // typings/contact.ts
+  // ../typings/contact.ts
   var init_contact = __esm({
-    "typings/contact.ts"() {
+    "../typings/contact.ts"() {
     }
   });
 
-  // resources/client/cl_contacts.ts
+  // client/cl_contacts.ts
   var init_cl_contacts = __esm({
-    "resources/client/cl_contacts.ts"() {
+    "client/cl_contacts.ts"() {
       init_contact();
       init_cl_utils();
       RegisterNuiProxy("npwd:getContacts" /* GET_CONTACTS */);
@@ -771,15 +811,15 @@
     }
   });
 
-  // typings/marketplace.ts
+  // ../typings/marketplace.ts
   var init_marketplace = __esm({
-    "typings/marketplace.ts"() {
+    "../typings/marketplace.ts"() {
     }
   });
 
-  // resources/client/cl_marketplace.ts
+  // client/cl_marketplace.ts
   var init_cl_marketplace = __esm({
-    "resources/client/cl_marketplace.ts"() {
+    "client/cl_marketplace.ts"() {
       init_marketplace();
       init_cl_utils();
       init_messages();
@@ -796,15 +836,15 @@
     }
   });
 
-  // typings/notes.ts
+  // ../typings/notes.ts
   var init_notes = __esm({
-    "typings/notes.ts"() {
+    "../typings/notes.ts"() {
     }
   });
 
-  // resources/client/cl_notes.ts
+  // client/cl_notes.ts
   var init_cl_notes = __esm({
-    "resources/client/cl_notes.ts"() {
+    "client/cl_notes.ts"() {
       init_notes();
       init_cl_utils();
       RegisterNuiProxy("npwd:addNote" /* ADD_NOTE */);
@@ -814,15 +854,15 @@
     }
   });
 
-  // typings/photo.ts
+  // ../typings/photo.ts
   var init_photo = __esm({
-    "typings/photo.ts"() {
+    "../typings/photo.ts"() {
     }
   });
 
-  // resources/client/cl_photo.ts
+  // client/cl_photo.ts
   var require_cl_photo = __commonJS({
-    "resources/client/cl_photo.ts"(exports) {
+    "client/cl_photo.ts"(exports) {
       init_photo();
       init_fivem();
       init_messages();
@@ -831,7 +871,14 @@
       init_cl_config();
       init_animation_controller();
       init_cl_utils();
-      var SCREENSHOT_BASIC_TOKEN = GetConvar("SCREENSHOT_BASIC_TOKEN", "none");
+      var SCREENSHOT_BASIC_TOKEN;
+      setImmediate(() => {
+        ClUtils.emitNetPromise("npwd:getAuthToken" /* GET_AUTHORISATION_TOKEN */).then(
+          ({ data }) => {
+            SCREENSHOT_BASIC_TOKEN = data;
+          }
+        );
+      });
       var exp2 = global.exports;
       var inCameraMode = false;
       function closePhoneTemp() {
@@ -910,38 +957,43 @@
         if (SCREENSHOT_BASIC_TOKEN === "none" && config.images.useAuthorization) {
           return console.error("Screenshot basic token not found. Please set in server.cfg");
         }
-        exp2["screenshot-basic"].requestScreenshotUpload(config.images.url, config.images.type, {
-          encoding: config.images.imageEncoding,
-          headers: {
-            authorization: config.images.useAuthorization ? `${config.images.authorizationPrefix} ${SCREENSHOT_BASIC_TOKEN}` : void 0,
-            "content-type": config.images.contentType
-          }
-        }, (data) => __async(exports, null, function* () {
-          try {
-            let parsedData = JSON.parse(data);
-            for (const index of config.images.returnedDataIndexes)
-              parsedData = parsedData[index];
-            const resp = yield ClUtils.emitNetPromise("npwd:UploadPhoto" /* UPLOAD_PHOTO */, parsedData);
-            res(resp);
-          } catch (e) {
-            rej(e.message);
-          }
-        }));
+        exp2["screenshot-basic"].requestScreenshotUpload(
+          config.images.url,
+          config.images.type,
+          {
+            encoding: config.images.imageEncoding,
+            headers: {
+              [config.images.useAuthorization && config.images.authorizationHeader]: `${config.images.authorizationPrefix} ${SCREENSHOT_BASIC_TOKEN}`,
+              [config.images.useContentType && "Content-Type"]: config.images.contentType
+            }
+          },
+          (data) => __async(exports, null, function* () {
+            try {
+              let parsedData = JSON.parse(data);
+              for (const index of config.images.returnedDataIndexes)
+                parsedData = parsedData[index];
+              const resp = yield ClUtils.emitNetPromise("npwd:UploadPhoto" /* UPLOAD_PHOTO */, parsedData);
+              res(resp);
+            } catch (e) {
+              rej(e.message);
+            }
+          })
+        );
       });
       RegisterNuiProxy("npwd:FetchPhotos" /* FETCH_PHOTOS */);
       RegisterNuiProxy("npwd:deletePhoto" /* DELETE_PHOTO */);
     }
   });
 
-  // typings/messages.ts
+  // ../typings/messages.ts
   var init_messages2 = __esm({
-    "typings/messages.ts"() {
+    "../typings/messages.ts"() {
     }
   });
 
-  // resources/client/cl_messages.ts
+  // client/cl_messages.ts
   var init_cl_messages = __esm({
-    "resources/client/cl_messages.ts"() {
+    "client/cl_messages.ts"() {
       init_messages2();
       init_messages();
       init_cl_utils();
@@ -968,16 +1020,16 @@
     }
   });
 
-  // typings/call.ts
+  // ../typings/call.ts
   var init_call = __esm({
-    "typings/call.ts"() {
+    "../typings/call.ts"() {
     }
   });
 
-  // resources/client/sounds/client-sound.class.ts
+  // client/sounds/client-sound.class.ts
   var Sound;
   var init_client_sound_class = __esm({
-    "resources/client/sounds/client-sound.class.ts"() {
+    "client/sounds/client-sound.class.ts"() {
       Sound = class {
         constructor(soundName, soundSetName) {
           this._soundName = soundName;
@@ -994,10 +1046,10 @@
     }
   });
 
-  // resources/client/sounds/client-ringtone.class.ts
+  // client/sounds/client-ringtone.class.ts
   var Ringtone;
   var init_client_ringtone_class = __esm({
-    "resources/client/sounds/client-ringtone.class.ts"() {
+    "client/sounds/client-ringtone.class.ts"() {
       Ringtone = class {
         constructor(ringtoneName) {
           this.ringtoneName = ringtoneName;
@@ -1015,16 +1067,16 @@
     }
   });
 
-  // typings/settings.ts
+  // ../typings/settings.ts
   var init_settings = __esm({
-    "typings/settings.ts"() {
+    "../typings/settings.ts"() {
     }
   });
 
-  // resources/client/settings/client-kvp.service.ts
+  // client/settings/client-kvp.service.ts
   var _KvpService, KvpService, client_kvp_service_default;
   var init_client_kvp_service = __esm({
-    "resources/client/settings/client-kvp.service.ts"() {
+    "client/settings/client-kvp.service.ts"() {
       _KvpService = class {
         setKvp(key, value) {
           SetResourceKvp(key, value);
@@ -1050,10 +1102,10 @@
     }
   });
 
-  // resources/client/calls/cl_calls.service.ts
-  var exp, CallService;
+  // client/calls/cl_calls.service.ts
+  var exp, CallService, callService;
   var init_cl_calls_service = __esm({
-    "resources/client/calls/cl_calls.service.ts"() {
+    "client/calls/cl_calls.service.ts"() {
       init_cl_main();
       init_call();
       init_client_sound_class();
@@ -1089,6 +1141,9 @@
         isCurrentCall(tgtCall) {
           return this.currentCall === tgtCall;
         }
+        getCurrentCall() {
+          return this.currentPendingCall;
+        }
         isInPendingCall() {
           return !!this.currentPendingCall;
         }
@@ -1114,7 +1169,11 @@
         handleStartCall(transmitter, receiver, isTransmitter, isUnavailable) {
           return __async(this, null, function* () {
             if (this.isInCall() || !(yield checkHasPhone()) || this.currentPendingCall)
-              return emitNet("npwd:rejectCall" /* REJECTED */, { transmitterNumber: transmitter }, 1 /* BUSY_LINE */);
+              return emitNet(
+                "npwd:rejectCall" /* REJECTED */,
+                { transmitterNumber: transmitter },
+                1 /* BUSY_LINE */
+              );
             this.currentPendingCall = receiver;
             this.openCallModal(true);
             if (isTransmitter) {
@@ -1156,6 +1215,13 @@
           const hangUpSound = new Sound(this.hangUpSoundName, this.hangUpSoundSet);
           hangUpSound.play();
         }
+        handleMute(state, callData) {
+          if (state) {
+            exp["pma-voice"].setCallChannel(0);
+          } else {
+            exp["pma-voice"].setCallChannel(callData.channelId);
+          }
+        }
         handleSendAlert(alert) {
           SendNUIMessage({
             app: "DIALER",
@@ -1164,13 +1230,14 @@
           });
         }
       };
+      callService = new CallService();
     }
   });
 
-  // resources/server/utils/miscUtils.ts
+  // server/utils/miscUtils.ts
   var onNetTyped, emitNetTyped;
   var init_miscUtils = __esm({
-    "resources/server/utils/miscUtils.ts"() {
+    "server/utils/miscUtils.ts"() {
       onNetTyped = (eventName, cb) => onNet(eventName, cb);
       emitNetTyped = (eventName, data, src) => {
         if (src) {
@@ -1181,32 +1248,34 @@
     }
   });
 
-  // resources/client/calls/cl_calls.controller.ts
-  var callService, initializeCallHandler;
+  // client/calls/cl_calls.controller.ts
+  var initializeCallHandler;
   var init_cl_calls_controller = __esm({
-    "resources/client/calls/cl_calls.controller.ts"() {
+    "client/calls/cl_calls.controller.ts"() {
       init_call();
       init_cl_calls_service();
       init_animation_controller();
       init_miscUtils();
       init_cl_utils();
       init_client();
-      callService = new CallService();
       initializeCallHandler = (data, cb) => __async(void 0, null, function* () {
         if (callService.isInCall())
           return;
         try {
-          const serverRes = yield ClUtils.emitNetPromise("npwd:beginCall" /* INITIALIZE_CALL */, data);
+          const serverRes = yield ClUtils.emitNetPromise(
+            "npwd:beginCall" /* INITIALIZE_CALL */,
+            data
+          );
           animationService.startPhoneCall();
           if (serverRes.status !== "ok") {
-            return cb(serverRes);
+            return cb == null ? void 0 : cb(serverRes);
           }
           const { transmitter, isTransmitter, receiver, isUnavailable } = serverRes.data;
           callService.handleStartCall(transmitter, receiver, isTransmitter, isUnavailable);
-          cb(serverRes);
+          cb == null ? void 0 : cb(serverRes);
         } catch (e) {
           console.error(e);
-          cb({ status: "error", errorMsg: "CLIENT_TIMED_OUT" });
+          cb == null ? void 0 : cb({ status: "error", errorMsg: "CLIENT_TIMED_OUT" });
         }
       });
       RegisterNuiCB("npwd:beginCall" /* INITIALIZE_CALL */, initializeCallHandler);
@@ -1233,7 +1302,10 @@
       }));
       RegisterNuiCB("npwd:endCall" /* END_CALL */, (data, cb) => __async(void 0, null, function* () {
         try {
-          const serverRes = yield ClUtils.emitNetPromise("npwd:endCall" /* END_CALL */, data);
+          const serverRes = yield ClUtils.emitNetPromise(
+            "npwd:endCall" /* END_CALL */,
+            data
+          );
           if (serverRes.status === "error")
             return console.error(serverRes.errorMsg);
           cb({});
@@ -1256,18 +1328,23 @@
       onNet("npwd:callSetAlert" /* SEND_ALERT */, (alert) => {
         callService.handleSendAlert(alert);
       });
+      RegisterNuiCB("npwd:toggleMuteCall" /* TOGGLE_MUTE_CALL */, (data, cb) => {
+        const { state, call } = data;
+        callService.handleMute(state, call);
+        cb({});
+      });
     }
   });
 
-  // typings/match.ts
+  // ../typings/match.ts
   var init_match = __esm({
-    "typings/match.ts"() {
+    "../typings/match.ts"() {
     }
   });
 
-  // resources/client/cl_match.ts
+  // client/cl_match.ts
   var init_cl_match = __esm({
-    "resources/client/cl_match.ts"() {
+    "client/cl_match.ts"() {
       init_match();
       init_messages();
       init_cl_utils();
@@ -1286,9 +1363,9 @@
     }
   });
 
-  // resources/client/cl_exports.ts
+  // client/cl_exports.ts
   var require_cl_exports = __commonJS({
-    "resources/client/cl_exports.ts"(exports) {
+    "client/cl_exports.ts"(exports) {
       init_messages();
       init_phone();
       init_cl_utils();
@@ -1297,6 +1374,9 @@
       init_notes();
       init_cl_main();
       init_client();
+      init_cl_calls_service();
+      init_animation_controller();
+      init_call();
       var exps2 = global.exports;
       exps2("openApp", (app) => {
         verifyExportArgType("openApp", app, ["string"]);
@@ -1341,12 +1421,24 @@
         }
         return global.clientPhoneNumber;
       }));
+      exps2("isInCall", () => {
+        return callService.isInCall();
+      });
+      exps2("endCall", () => __async(exports, null, function* () {
+        if (callService.isInCall()) {
+          CallService.sendCallAction("npwd:endCall" /* END_CALL */, null);
+          animationService.endPhoneCall();
+        }
+      }));
+      exps2("sendUIMessage", (type, payload = {}) => {
+        SendNUIMessage({ type, payload });
+      });
     }
   });
 
-  // resources/client/settings/client-settings.ts
+  // client/settings/client-settings.ts
   var init_client_settings = __esm({
-    "resources/client/settings/client-settings.ts"() {
+    "client/settings/client-settings.ts"() {
       init_cl_utils();
       init_settings();
       init_client_kvp_service();
@@ -1374,15 +1466,15 @@
     }
   });
 
-  // typings/alerts.ts
+  // ../typings/alerts.ts
   var init_alerts = __esm({
-    "typings/alerts.ts"() {
+    "../typings/alerts.ts"() {
     }
   });
 
-  // resources/client/cl_notifications.ts
+  // client/cl_notifications.ts
   var init_cl_notifications = __esm({
-    "resources/client/cl_notifications.ts"() {
+    "client/cl_notifications.ts"() {
       init_cl_utils();
       init_alerts();
       init_client_kvp_service();
@@ -1396,10 +1488,10 @@
     }
   });
 
-  // resources/client/client.ts
+  // client/client.ts
   var import_cl_photo, import_cl_exports, ClUtils;
   var init_client = __esm({
-    "resources/client/client.ts"() {
+    "client/client.ts"() {
       init_cl_utils();
       init_cl_config();
       init_cl_main();
